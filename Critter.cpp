@@ -1,42 +1,32 @@
-#include "Bestiole.h"
+#include "Critter.h"
 #include <cmath>
 
-const double Bestiole::PMORT=0.6;
-const double Bestiole::TAILLE_MAX=20.;
-const int Bestiole::AGE_MAX = 80;
-const double Bestiole::VITESSE_MAX= 10.;
-int Bestiole::compteur = 0;
+const double Critter::PDEAD=0.6;
+const double Critter::MAX_SIZE=20.;
+const int Critter::AGE_MAX = 80;
+const double Critter::SPEED_MAX= 10.;
+int Critter::counter = 0;
+ 
 
-Bestiole::Bestiole(int xLim, int yLim){
-	identite = ++compteur;
+Critter::Critter(int xLim, int yLim){
+	identity = ++counter;
+	cout <<"Create the critter :"<< identity<< endl;
 
-	cout <<"Creation de la bestiole"<< identite<< endl;
 	x = static_cast<double>( rand() )/RAND_MAX*xLim;
 	y = static_cast<double>( rand() )/RAND_MAX*yLim;
-
-	cout <<"position : ("<<x<<","<<y<<")"<<endl;
-
 	cumulX = cumulY = 0.;
 	orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
-
-	cout <<"Orientation:"<< orientation<< endl;
-
-	pMort = PMORT;
-	ageLimite = static_cast<double>( rand() )/RAND_MAX*AGE_MAX;
-	cout <<"ageLimite"<< ageLimite<< endl;
-
-	vitesse = static_cast<double>( rand() )/RAND_MAX*VITESSE_MAX;
-	cout <<"vitesse"<< vitesse<< endl;
-
-	taille = static_cast<double>( rand() )/RAND_MAX*TAILLE_MAX;
-	cout <<"taille"<< taille<< endl;
+	pDead = PDEAD;
+	ageLimit = static_cast<double>( rand() )/RAND_MAX*AGE_MAX;
+	speed = static_cast<double>( rand() )/RAND_MAX*SPEED_MAX;
+	size = static_cast<double>( rand() )/RAND_MAX*MAX_SIZE;
 
 	isDead = false;
 
 }
 
-Bestiole::~Bestiole(){
-   cout << "destruction de la Bestiole" << identite <<endl;
+Critter::~Critter(){
+   cout << "destruct the critter :" << identity <<endl;
 }
 
 /*
@@ -74,41 +64,51 @@ void Bestiole::bouge(Mileu ){
 
 }
 */
-double Bestiole::distance(Bestiole &b){
-	return sqrt(pow(x-b.x,2)+pow(y-b.y,2));
+double Critter::distance(Critter &c){
+	return sqrt(pow(x-c.x,2)+pow(y-c.y,2));
 }
 
-bool Bestiole::collision(Bestiole &b){
-	double distance = this->distance(b);
-	return static_cast<bool> (distance<=(taille+b.taille));
+bool Critter::collision(Critter &c){
+	double distance = this->distance(c);
+	return (distance<=(size+c.size));
 }
 
 
-void Bestiole::comportementApresCollision(){
+void Critter::behaviorAfterCollision(){
 	double p = static_cast<double>( rand() )/RAND_MAX;
-	cout << "proba" << p << endl;
-	if(p>pMort){
-		cout<<"mort"<<endl;
+	if(p>pDead){
+		cout<<"DEAD"<<endl;
 		isDead = true;
 	}
 	else{
-		cout<<"vivant"<<endl;
 		orientation += M_PI;
 		orientation = fmod(orientation, 2*M_PI);
-		cout <<"Orientation:"<< orientation<< endl;
 
 	}
 
 
 }
 
-bool Bestiole::detection(Bestiole &b){
+bool Critter::detection(Critter &b){
 	return false;
 }
 
-Bestiole* Bestiole::clone(){
-	return new Bestiole(*this);
+Critter* Critter::clone(){
+	Critter* copy = new Critter(*this);
+	copy->identity = ++counter;
+	copy->x += 2*size*sin( orientation )/5;
+	copy->y -= 2*size*cos( orientation )/5;
+
+	return copy;
 }
 
 
-
+string Critter::to_string(){
+	return "Bestiole {Identity : "+std::to_string(identity) + 
+	"\nPosition:(" + std::to_string(x) +"," + std::to_string(y)+"),\n"
+	"age limit : " + std::to_string(ageLimit) + ","
+	"\nspeed : " + std::to_string(speed) + ","
+	"\nsize : " + std::to_string(size) + ","
+	"\norientation : " + std::to_string(orientation) +"}";
+}
+ 

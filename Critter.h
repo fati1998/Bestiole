@@ -1,28 +1,28 @@
-#ifndef _BESTIOLE_H_
-#define _BESTIOLE_H_
+#ifndef _CRITTER_H_
+#define _CRITTER_H_
 
 #include <iostream>
 #include <cmath>
-
+#include <string>
 using namespace std;
 
-class Bestiole{
+class Critter{
 	protected:
 
-		static const double PMORT;
-		static const double TAILLE_MAX;
+		static const double PDEAD;
+		static const double MAX_SIZE;
 		static const int AGE_MAX;
-		static const double VITESSE_MAX;
-		static int compteur;
+		static const double SPEED_MAX;
+		static int counter;
 
 	private:
-		int identite;
+		int identity;
 		int x, y;
 		double            cumulX, cumulY;
-		double pMort;
-		int ageLimite;
-		double vitesse;
-		double taille;
+		double pDead;
+		int ageLimit;
+		double speed;
+		double size;
 		double orientation;
 		bool isDead;
 
@@ -31,13 +31,14 @@ class Bestiole{
 		//void bouge( int xLim, int yLim );
 
 	public:
-		Bestiole(int xLim, int yLim);
-		~Bestiole();
-		double distance(Bestiole &b);
-		bool collision(Bestiole &b);
-		void comportementApresCollision();
-		bool detection(Bestiole &b);
-		Bestiole *clone();
+		Critter(int xLim, int yLim);
+		~Critter();
+		double distance(Critter &c);
+		bool collision(Critter &c);
+		void behaviorAfterCollision();
+		bool detection(Critter &c);
+		string to_string();
+		Critter *clone();
 
 };
 

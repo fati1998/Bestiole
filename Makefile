@@ -1,8 +1,8 @@
-main: main.cpp Bestiole.o
-	g++ -o main main.cpp Bestiole.o
+main: main.cpp Critter.o
+	g++ -o main main.cpp Critter.o
 
-Bestiole.o : Bestiole.cpp Bestiole.h
-	g++ -c Bestiole.cpp
+Critter.o : Critter.cpp Critter.h
+	g++ -c Critter.cpp
 
 
 
