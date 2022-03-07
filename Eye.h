@@ -5,10 +5,10 @@ using namespace std;
 
 class Eye: public Sensor{
 	protected:
-		static const double DISTANCE_MIN;
-		static const double DISTANCE_MAX;
-		static const double CAPACITY_MIN;
-		static const double CAPACITY_MAX;
+		static const double DISTANCEE_MIN;
+		static const double DISTANCEE_MAX;
+		static const double CAPACITYE_MIN;
+		static const double CAPACITYE_MAX;
 
 	public:
 		Eye();
