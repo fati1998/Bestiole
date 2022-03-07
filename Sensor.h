@@ -13,7 +13,7 @@ class Sensor{
 	public:
 
 		Sensor(double f, double d, double c);
-		~Sensor();
+		virtual ~Sensor();
 		double getField();
 		double getDistance();
 		double getDetectionCapacity();
