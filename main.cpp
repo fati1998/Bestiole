@@ -1,6 +1,7 @@
 #include "Critter.h"
 #include "Sensor.h"
 #include "Eye.h"
+#include "Ear.h"
 #include <iostream>
 
 using namespace std;
@@ -26,8 +27,11 @@ int main(){
 	cout << s.getField()<<endl;
 	cout << s.getDetectionCapacity()<<endl;
 	Sensor*  c = s.clone();
+	// Test Ear
 
-	
+	Ear r = Ear();
+	cout << s.getDistance()<<endl;
+
 
 	
 }
