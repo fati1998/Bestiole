@@ -2,7 +2,7 @@
 #include <cmath>
 
 const double Critter::PDEAD=0.6;
-const double Critter::MAX_SIZE=20.;
+const double Critter::MAX_SIZE=1.;
 const int Critter::AGE_MAX = 80;
 const double Critter::SPEED_MAX= 10.;
 int Critter::counter = 0;
@@ -91,6 +91,14 @@ void Critter::behaviorAfterCollision(){
 
 bool Critter::detection(Critter &b){
 	return false;
+}
+
+bool Critter::myEyeDetects(Critter &c){
+	double angle = orientation - atan(c.y/c.x);
+	double dist = distance(c)-size-c.size;
+	if(dist<0){dist = 0;}
+	return dist<myEye.getDistance() and -myEye.getField() <= angle <= myEye.getField();
+
 }
 
 Critter* Critter::clone(){

@@ -9,8 +9,8 @@ using namespace std;
 int main(){
 	// Test Critter
 
-	Critter b = Critter(100,102);
-	Critter b1 = Critter(100,102);
+	Critter b = Critter(12,11);
+	Critter b1 = Critter(12,11);
 	cout << b.distance(b1)<<endl;
 	cout << b.collision(b1)<<endl;
 	cout << b.detection(b1)<<endl;
@@ -19,7 +19,7 @@ int main(){
 	Critter* copy = b1.clone();
 	cout <<b1.to_string()<< endl;
 	cout <<copy->to_string()<< endl;
-
+	cout<< b.myEyeDetects(b);
 	// Test Eye
 	
 	Eye s = Eye();

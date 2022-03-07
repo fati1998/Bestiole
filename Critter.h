@@ -2,6 +2,8 @@
 #define _CRITTER_H_
 
 #include <iostream>
+#include "Eye.h"
+#include "Ear.h"
 #include <cmath>
 #include <string>
 using namespace std;
@@ -17,6 +19,7 @@ class Critter{
 
 	private:
 		int identity;
+		Eye myEye = Eye();
 		int x, y;
 		double            cumulX, cumulY;
 		double pDead;
@@ -37,6 +40,7 @@ class Critter{
 		bool collision(Critter &c);
 		void behaviorAfterCollision();
 		bool detection(Critter &c);
+		bool myEyeDetects(Critter &c);
 		string to_string();
 		Critter *clone();
 
