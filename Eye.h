@@ -3,8 +3,10 @@
 
 #include "Sensor.h"
 #include <iostream>
+#include <string>
 #include <cmath>
 using namespace std;
+class Critter;
 
 class Eye: public Sensor{
 	protected:
@@ -18,6 +20,8 @@ class Eye: public Sensor{
 	public:
 		Eye();
 		~Eye();
+		string to_string() override;
+		bool detects(Critter* c1, Critter* c2) override;
 		Sensor *clone()const override;
 
 };

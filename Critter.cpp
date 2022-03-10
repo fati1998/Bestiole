@@ -1,5 +1,7 @@
 #include "Critter.h"
 #include <cmath>
+#include <string>
+using namespace std;
 
 const double Critter::PDEAD=0.6;
 const double Critter::MAX_SIZE=1.;
@@ -20,8 +22,14 @@ Critter::Critter(int xLim, int yLim){
 	ageLimit = static_cast<double>( rand() )/RAND_MAX*AGE_MAX;
 	speed = static_cast<double>( rand() )/RAND_MAX*SPEED_MAX;
 	size = static_cast<double>( rand() )/RAND_MAX*MAX_SIZE;
-
 	isDead = false;
+	for(int i=0; i<rand()/(RAND_MAX/3); i++){
+		mySensors.push_back(new Eye());
+	}
+	for(int i=0; i<rand()/(RAND_MAX/3); i++){
+		mySensors.push_back(new Ear());
+	}
+
 
 }
 
@@ -64,13 +72,13 @@ void Bestiole::bouge(Mileu ){
 
 }
 */
-double Critter::distance(Critter &c){
-	return sqrt(pow(x-c.x,2)+pow(y-c.y,2));
+double Critter::distance(Critter * c){
+	return sqrt(pow(x-c->x,2)+pow(y-c->y,2));
 }
 
-bool Critter::collision(Critter &c){
+bool Critter::collision(Critter * c){
 	double distance = this->distance(c);
-	return (distance<=(size+c.size));
+	return (distance<=(size+c->size));
 }
 
 
@@ -86,20 +94,19 @@ void Critter::behaviorAfterCollision(){
 
 	}
 
-
 }
 
-bool Critter::detection(Critter &b){
+bool Critter::detection(Critter* c){
+
+	for(Sensor* s : mySensors){
+		if (s->detects(this, c)){
+			return true;
+		}
+	}
+
 	return false;
 }
 
-bool Critter::myEyeDetects(Critter &c){
-	double angle = orientation - atan(c.y/c.x);
-	double dist = distance(c)-size-c.size;
-	if(dist<0){dist = 0;}
-	return dist<myEye.getDistance() and -myEye.getField() <= angle <= myEye.getField();
-
-}
 
 Critter* Critter::clone(){
 	Critter* copy = new Critter(*this);
@@ -110,13 +117,22 @@ Critter* Critter::clone(){
 	return copy;
 }
 
+double Critter::getX(){return x;}
+double Critter::getY(){return y;}
+double Critter::getOrientation(){return orientation;}
+double Critter::getSize(){return size;}
 
 string Critter::to_string(){
+	string st = " ";
+	for(Sensor* s : mySensors){
+		st = st + s->to_string();
+	}
 	return "Bestiole {Identity : "+std::to_string(identity) + 
 	"\nPosition:(" + std::to_string(x) +"," + std::to_string(y)+"),\n"
 	"age limit : " + std::to_string(ageLimit) + ","
 	"\nspeed : " + std::to_string(speed) + ","
 	"\nsize : " + std::to_string(size) + ","
-	"\norientation : " + std::to_string(orientation) +"}";
+	"\norientation : " + std::to_string(orientation) +
+	"\nSensors: " + st+"}";
 }
  

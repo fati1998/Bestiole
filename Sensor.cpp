@@ -1,4 +1,5 @@
- #include "Sensor.h"
+#include "Sensor.h"
+#include "Critter.h"
 
 Sensor::Sensor(double f, double d, double c){
 	cout<< "Create Sensor" << endl;

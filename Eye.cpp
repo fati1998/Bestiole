@@ -1,4 +1,5 @@
 #include "Eye.h"
+#include "Critter.h"
 
 const double Eye::FIELDE_MIN=0.;
 const double Eye::FIELDE_MAX=3.;
@@ -16,6 +17,22 @@ Eye::Eye(): Sensor(0., 41.,0.){
 
 Eye::~Eye(){
 	cout<<"Destruct Eye"<<endl;
+}
+
+string Eye::to_string(){
+	return "Eye {field : "+ std::to_string(field)+ ",\n"  + 
+				"distance : " + std::to_string(distance) + ",\n"  + 
+				"detectionCapacity : " + std::to_string(detectionCapacity) + "}\n";
+
+}
+
+
+bool Eye::detects(Critter* c1, Critter* c2){
+	double angle = c1->getOrientation() - atan(c2->getY()/c2->getX());
+	double dist = c1->distance(c2)-c1->getSize()-c2->getSize();
+	if(dist<0){dist = 0;}
+	return dist<distance and abs(angle) <= field;
+
 }
 Sensor* Eye::clone() const{
 	return new Eye(*this);

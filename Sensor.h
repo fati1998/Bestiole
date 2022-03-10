@@ -2,7 +2,10 @@
 #define _SENSOR_H_
 
 #include <iostream>
+#include <string>
 using namespace std;
+
+class Critter;
 
 class Sensor{
 	protected:
@@ -18,6 +21,8 @@ class Sensor{
 		double getDistance();
 		double getDetectionCapacity();
 		virtual Sensor *clone()const=0;
+		virtual bool detects(Critter* c1, Critter* c2){return false;};
+		virtual string to_string(){return " ";};
 
 };
 

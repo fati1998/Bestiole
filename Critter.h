@@ -6,6 +6,7 @@
 #include "Ear.h"
 #include <cmath>
 #include <string>
+#include <list>
 using namespace std;
 
 class Critter{
@@ -28,6 +29,7 @@ class Critter{
 		double size;
 		double orientation;
 		bool isDead;
+		list<Sensor*> mySensors;
 
 
 	private:
@@ -36,14 +38,18 @@ class Critter{
 	public:
 		Critter(int xLim, int yLim);
 		~Critter();
-		double distance(Critter &c);
-		bool collision(Critter &c);
+		double distance(Critter *c);
+		bool collision(Critter* c);
 		void behaviorAfterCollision();
-		bool detection(Critter &c);
-		bool myEyeDetects(Critter &c);
+		bool detection(Critter* c);
+		//bool myEyeDetects(Critter &c);
 		string to_string();
 		Critter *clone();
-
+		// Getters
+		double getX();
+		double getY();
+		double getOrientation();
+		double getSize();
 };
 
 #endif
