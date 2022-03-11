@@ -1,10 +1,11 @@
 #include "Critter.h"
-#include "Sensor.h"
-#include "Eye.h"
-#include "Ear.h"
+#include "sensor/Sensor.h"
+#include "sensor/Eye.h"
+#include "sensor/Ear.h"
 #include <iostream>
 #include <list>
-
+#include "behavior/Behavior.h"
+#include "behavior/Fearful.h"
 using namespace std;
 
 int main(){
@@ -15,6 +16,9 @@ int main(){
 	cout << b.to_string() << endl;
 	cout << b1.to_string() << endl;
 	cout << b.detection(&b1);
+	Fearful c =  Fearful();
+	cout<< c.getColor() <<endl;
+
 	/*
 	cout << b.distance(b1)<<endl;
 	cout << b.collision(b1)<<endl;
