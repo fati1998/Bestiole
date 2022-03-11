@@ -6,8 +6,11 @@
 #include <list>
 #include "behavior/Behavior.h"
 #include "behavior/Fearful.h"
+#include "behavior/Careful.h"
+#include "behavior/SuicideBomber.h"
+#include "behavior/Gregarious.h"
+#include "behavior/MultipleBehavior.h"
 using namespace std;
-
 int main(){
 	// Test Critter
 	
@@ -16,8 +19,16 @@ int main(){
 	cout << b.to_string() << endl;
 	cout << b1.to_string() << endl;
 	cout << b.detection(&b1);
-	Fearful c =  Fearful();
-	cout<< c.getColor() <<endl;
+	Fearful c1 =  Fearful();
+	Careful c2 =  Careful();
+	Gregarious c3 =  Gregarious();
+	MultipleBehavior c4 =  MultipleBehavior();
+	SuicideBomber c5 =  SuicideBomber();
+	cout<< c1.getColor() <<endl;
+	cout<< c2.getColor() <<endl;
+	cout<< c3.getColor() <<endl;
+	cout<< c4.getColor() <<endl;
+	cout<< c5.getColor() <<endl;
 
 	/*
 	cout << b.distance(b1)<<endl;
