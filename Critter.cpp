@@ -4,7 +4,7 @@
 using namespace std;
 
 const double Critter::PDEAD=0.6;
-const double Critter::MAX_SIZE=1.;
+const double Critter::MAX_SIZE=8.;
 const int Critter::AGE_MAX = 80;
 const double Critter::SPEED_MAX= 10.;
 int Critter::counter = 0;

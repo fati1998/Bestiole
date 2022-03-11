@@ -2,13 +2,13 @@
 #define _CRITTER_H_
 
 #include <iostream>
-#include "Eye.h"
-#include "Ear.h"
+#include "sensor/Eye.h"
+#include "sensor/Ear.h"
 #include <cmath>
 #include <string>
 #include <list>
 using namespace std;
-
+ 
 class Critter{
 	protected:
 
